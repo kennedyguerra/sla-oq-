@@ -6,152 +6,220 @@
   <title>MEMES DO QUAENNEDY</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* Custom styles */
     body {
-      transition: background-color 0.5s ease, color 0.5s ease;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: #e0e0e0;
+      transition: background-color 0.4s, color 0.4s;
     }
-    /* Accessibility theme styles */
-    .theme-light {
-      background-color: #f9fafb;
-      color: #111827;
+    h1 {
+      font-weight: 900;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #f8fafc;
+      text-shadow: 2px 2px 8px #334155;
     }
-    .theme-dark {
-      background-color: #1f2937;
-      color: #f3f4f6;
+    .container {
+      max-width: 960px;
+      margin: 0 auto 4rem;
+      padding: 0 1rem;
     }
-    .theme-sepia {
-      background-color: #f4ecd8;
-      color: #5b4636;
+    .meme-card {
+      background-color: #334155;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgb(4 12 32 / 0.7);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      margin-bottom: 2rem;
+      border: 2.5px solid transparent;
     }
-    /* Buttons style */
-    .access-btn {
-      @apply mx-1 px-3 py-1 rounded-md font-semibold transition;
+    .meme-card:focus-within,
+    .meme-card:hover {
+      box-shadow: 0 12px 24px rgb(99 179 237 / 0.85);
+      transform: translateY(-6px);
+      border-color: #60a5fa;
+      outline: none;
     }
-    .access-btn:hover {
-      filter: brightness(0.9);
+    .meme-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      border-bottom: 2px solid #2563eb;
+      background: #1e293b;
+    }
+    .meme-description {
+      padding: 1rem 1.25rem;
+      font-size: 1rem;
+      color: #cbd5e1;
+      min-height: 4.5rem;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px #000000a1;
     }
 
-    /* Image container with nice drop shadow and rounded edges */
-    .meme-card {
-      @apply bg-white rounded-lg shadow-lg overflow-hidden border border-gray-300 dark:bg-gray-800 dark:border-gray-700;
-      max-width: 320px;
-      transition: transform 0.3s ease;
+    /* Accessibility button styles */
+    .btn-accessibility {
+      background-color: #2563eb;
+      color: white;
+      padding: 0.45rem 1.1rem;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgb(37 99 235 / 0.6);
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      margin: 0 0.5rem 1rem 0;
+      user-select: none;
     }
-    .meme-card:hover {
-      transform: scale(1.05);
+    .btn-accessibility:hover,
+    .btn-accessibility:focus-visible {
+      background-color: #1e40af;
+      box-shadow: 0 5px 12px rgb(31 41 55 / 0.9);
+      outline-offset: 3px;
+      outline: 2px solid #3b82f6;
     }
-    .meme-img {
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      width: 100%;
-      filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.3));
+    .btn-accessibility:active {
+      background-color: #1e3a8a;
+      box-shadow: 0 2px 6px rgb(30 64 175 / 0.85);
     }
-    .desc {
-      @apply p-3 text-sm md:text-base font-medium leading-relaxed text-gray-700 dark:text-gray-300;
-      min-height: 3.5rem;
+
+    /* Theme variations */
+    body.light-theme {
+      background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+      color: #1e293b;
     }
-    /* Footer style */
-    footer {
-      @apply text-center py-6 mt-10 text-gray-500 dark:text-gray-400 font-mono text-sm;
+    body.light-theme .meme-card {
+      background-color: #f1f5f9;
+      box-shadow: 0 4px 18px rgb(0 0 0 / 0.15);
+      border-color: transparent;
     }
-    /* Responsive grid gallery */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 1.5rem;
-      padding: 0 1rem;
-      margin-top: 1.5rem;
+    body.light-theme .meme-card:hover,
+    body.light-theme .meme-card:focus-within {
+      box-shadow: 0 8px 22px rgb(37 99 235 / 0.3);
+      border-color: #3b82f6;
     }
+    body.light-theme .meme-description {
+      color: #334155;
+      text-shadow: none;
+    }
+    body.light-theme .btn-accessibility {
+      background-color: #2563eb;
+      color: white;
+      box-shadow: 0 3px 8px rgb(37 99 235 / 0.65);
+    }
+    body.light-theme .btn-accessibility:hover,
+    body.light-theme .btn-accessibility:focus-visible {
+      background-color: #1e40af;
+    }
+    
   </style>
 </head>
-<body class="theme-light">
-  <header class="flex flex-col md:flex-row md:items-center justify-between bg-gradient-to-r from-yellow-400 via-red-400 to-pink-500 p-6 text-white shadow-lg">
-    <h1 class="text-3xl font-extrabold select-none drop-shadow-lg max-w-full md:max-w-md break-words" aria-label="Título do site MEMES DO QUAENNEDY">MEMES DO QUAENNEDY</h1>
-    <nav class="mt-4 md:mt-0 flex space-x-3 justify-center">
-      <button id="btnLight" class="access-btn bg-white text-yellow-700" aria-label="Tema Claro" title="Tema Claro">Claro</button>
-      <button id="btnDark" class="access-btn bg-gray-900 text-gray-100" aria-label="Tema Escuro" title="Tema Escuro">Escuro</button>
-      <button id="btnSepia" class="access-btn bg-yellow-100 text-yellow-900" aria-label="Tema Sépia" title="Tema Sépia">Sépia</button>
+<body>
+  <header role="banner" class="container">
+    <h1>MEMES DO QUAENNEDY</h1>
+    <nav aria-label="Configurações de acessibilidade" class="flex flex-wrap justify-center items-center mb-6 gap-3" role="navigation">
+      <!-- Font size controls -->
+      <button id="btn-font-decrease" class="btn-accessibility" aria-label="Diminuir tamanho da fonte">A-</button>
+      <button id="btn-font-reset" class="btn-accessibility" aria-label="Restaurar tamanho padrão da fonte">A</button>
+      <button id="btn-font-increase" class="btn-accessibility" aria-label="Aumentar tamanho da fonte">A+</button>
+      <!-- Theme controls -->
+      <button id="btn-theme-light" class="btn-accessibility" aria-label="Tema claro">Tema Claro</button>
+      <button id="btn-theme-dark" class="btn-accessibility" aria-label="Tema escuro">Tema Escuro</button>
     </nav>
-    <div class="mt-4 md:mt-0 flex items-center space-x-2 justify-center" role="region" aria-label="Controle de acessibilidade para tamanho da fonte">
-      <button id="increaseFont" class="access-btn bg-blue-600 text-white" aria-label="Aumentar tamanho da fonte" title="Aumentar Fonte">A+</button>
-      <button id="decreaseFont" class="access-btn bg-blue-600 text-white" aria-label="Diminuir tamanho da fonte" title="Diminuir Fonte">A-</button>
-    </div>
   </header>
 
-  <main class="max-w-7xl mx-auto mt-10">
-    <section aria-labelledby="galleryTitle" class="gallery" tabindex="0">
-      <h2 id="galleryTitle" class="sr-only">Galeria de Memes</h2>
-
-      <article class="meme-card" tabindex="0" aria-label="Meme: Maior monstro do matagal que arrasta suas vítimas pro matagal, aquele que já rodou o mundo">
-        <img src="https://i.pinimg.com/736x/3d/3e/9c/3d3e9cbce2db56af2bfc47e7a72a7003.jpg" alt="Imagem do maior monstro do matagal, figura assustadora com dentes grandes e olhos ferozes em uma floresta escura" class="meme-img" onerror="this.onerror=null;this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6d30ddcb-f8f7-43e1-994d-138a7fbed7cd.png';"/>
-        <p class="desc">Aqui o maior monstro do matagal que arasta suas vitmas pro matagal. Aquele que ja rodou o mundo</p>
+  <main class="container" role="main" aria-label="Galeria de memes do Quaennedy">
+    <section id="gallery" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+      <article tabindex="0" class="meme-card" aria-label="Meme descrição: aqui o maior monstro do matagal que arasta suas vitmas pro matagal. Aquele que ja rodou o mundo">
+        <img 
+          src="https://i.pinimg.com/736x/3d/3e/9c/3d3e9cbce2db56af2bfc47e7a72a7003.jpg" 
+          alt="Foto artística e humorística de um macaco com expressão feroz e grande, montanha e floresta ao fundo, estilo fotografia realista" 
+          class="meme-image" 
+          onerror="this.onerror=null;this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dfad7fc0-2708-43f8-8bdc-7dc1e7427498.png';" 
+        />
+        <p class="meme-description">Aqui o maior monstro do matagal que arasta suas vitmas pro matagal. Aquele que ja rodou o mundo</p>
       </article>
 
-      <article class="meme-card" tabindex="0" aria-label="Meme: Macaco Chad">
-        <img src="https://i.pinimg.com/736x/01/7d/ab/017dab1a049de60b9e44db2491912e21.jpg" alt="Imagem de um macaco com pose confiante como símbolo de 'Macaco Chad' com fundo tropical verde" class="meme-img" onerror="this.onerror=null;this.src='https://placehold.co/320x240?text=Imagem+n%C3%A3o+dispon%C3%ADvel';"/>
-        <p class="desc">Macaco Chad</p>
+      <article tabindex="0" class="meme-card" aria-label="Meme descrição: macaco chad">
+        <img 
+          src="https://i.pinimg.com/736x/01/7d/ab/017dab1a049de60b9e44db2491912e21.jpg" 
+          alt="Imagem meme de um macaco com postura confiante, semblante de 'chad', em fundo neutro azul suave" 
+          class="meme-image" 
+          onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Imagem+Indisponivel&font=roboto';" 
+        />
+        <p class="meme-description">Macaco Chad</p>
       </article>
 
-      <article class="meme-card" tabindex="0" aria-label="Meme: O maior inimigo do L o peaksonaro">
-        <img src="https://i.pinimg.com/736x/39/ed/04/39ed04c1f6b965ffa8ae413795de70fb.jpg" alt="Imagem simbolizando o maior inimigo do L o peaksonaro, figura caricata com expressão desafiadora e cores fortes" class="meme-img" onerror="this.onerror=null;this.src='https://placehold.co/320x240?text=Imagem+n%C3%A3o+dispon%C3%ADvel';"/>
-        <p class="desc">O maior inimigo do L o peaksonaro</p>
+      <article tabindex="0" class="meme-card" aria-label="Meme descrição: O maior inimigo do L o peaksonaro">
+        <img 
+          src="https://i.pinimg.com/736x/39/ed/04/39ed04c1f6b965ffa8ae413795de70fb.jpg" 
+          alt="Ilustração meme humorística e caricata mostrando um inimigo sombrio com máscara preta, contra um fundo vermelho vibrante e expressões intensas" 
+          class="meme-image" 
+          onerror="this.onerror=null;this.src='https://placehold.co/600x400?text=Imagem+Indisponivel&font=roboto';"
+        />
+        <p class="meme-description">O maior inimigo do L o peaksonaro</p>
       </article>
     </section>
   </main>
 
-  <footer>
-    Criado por Kennedy Moura Guerra
+  <footer class="container text-center text-sm text-slate-400 pb-6 select-none">
+    <p>criado por kennedy moura guerra</p>
   </footer>
 
   <script>
-    const root = document.body;
-    const increaseBtn = document.getElementById('increaseFont');
-    const decreaseBtn = document.getElementById('decreaseFont');
-    const btnLight = document.getElementById('btnLight');
-    const btnDark = document.getElementById('btnDark');
-    const btnSepia = document.getElementById('btnSepia');
+    (() => {
+      const body = document.body;
+      const btnDecrease = document.getElementById('btn-font-decrease');
+      const btnReset = document.getElementById('btn-font-reset');
+      const btnIncrease = document.getElementById('btn-font-increase');
+      const btnThemeLight = document.getElementById('btn-theme-light');
+      const btnThemeDark = document.getElementById('btn-theme-dark');
+      let currentFontSize = 100; // percentage base 100%
+      const minFontSize = 75;
+      const maxFontSize = 150;
 
-    let currentFontSize = 16;
-    const minFontSize = 12;
-    const maxFontSize = 24;
-
-    function updateFontSize(size) {
-      currentFontSize = size;
-      document.documentElement.style.fontSize = currentFontSize + "px";
-    }
-
-    increaseBtn.addEventListener('click', () => {
-      if (currentFontSize < maxFontSize) {
-        updateFontSize(currentFontSize + 2);
+      function updateFontSize() {
+        document.documentElement.style.fontSize = currentFontSize + '%';
       }
-    });
 
-    decreaseBtn.addEventListener('click', () => {
-      if (currentFontSize > minFontSize) {
-        updateFontSize(currentFontSize - 2);
-      }
-    });
+      btnDecrease.addEventListener('click', () => {
+        if(currentFontSize > minFontSize) {
+          currentFontSize -= 10;
+          updateFontSize();
+        }
+      });
 
-    // Theme switcher functions
-    function setTheme(themeName) {
-      root.classList.remove('theme-light', 'theme-dark', 'theme-sepia');
-      root.classList.add(themeName);
-      localStorage.setItem('theme', themeName);
-    }
+      btnIncrease.addEventListener('click', () => {
+        if(currentFontSize < maxFontSize) {
+          currentFontSize += 10;
+          updateFontSize();
+        }
+      });
 
-    btnLight.addEventListener('click', () => setTheme('theme-light'));
-    btnDark.addEventListener('click', () => setTheme('theme-dark'));
-    btnSepia.addEventListener('click', () => setTheme('theme-sepia'));
+      btnReset.addEventListener('click', () => {
+        currentFontSize = 100;
+        updateFontSize();
+      });
 
-    // Load previously saved theme from localStorage
-    window.addEventListener('load', () => {
-      const savedTheme = localStorage.getItem('theme');
-      if(savedTheme) {
-        setTheme(savedTheme);
-      }
-      // Set default font size on load
-      updateFontSize(currentFontSize);
-    });
+      btnThemeLight.addEventListener('click', () => {
+        body.classList.add('light-theme');
+      });
+
+      btnThemeDark.addEventListener('click', () => {
+        body.classList.remove('light-theme');
+      });
+
+      // Initialize font-size on load
+      updateFontSize();
+    })();
   </script>
+</body>
+</html>
+
 </body>
 </html>
